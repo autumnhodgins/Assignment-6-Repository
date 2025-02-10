@@ -1,0 +1,7 @@
+---
+title: "Assignment 6 Markdown"
+author: "Autumn Hodgins"
+date: "2025-02-10"
+output: html_document
+---
+Markdown for Assignment 6
