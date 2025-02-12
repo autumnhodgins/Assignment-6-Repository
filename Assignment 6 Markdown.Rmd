@@ -19,3 +19,46 @@ detectCores()
 My computer has 8 cores.
 
 
+Generating a series of 100,000 numbers, calculating the mean, and repeating this 4000 times. The output is the run time that it takes for my computer to complete this program.
+```{r}
+start <- Sys.time()
+
+for(i in 1:4000){
+  random_numbers <- rnorm(100000, mean = 10, sd = 3)
+  mean <- mean(random_numbers)
+}
+
+end <- Sys.time()
+
+time_to_run <- end - start
+print(time_to_run)
+```
+The program running in series took 18.2 seconds to run. I predict that this would take 7 times less with a multi-threaded program, as I will be using 7 cores (leaving 1 core for other processing in my computer).
+
+```{r}
+print(time_to_run/7)
+```
+This should be around 2.6 seconds.
+
+Running this as a parallel program:
+```{r}
+start <- Sys.time()
+
+Cores <- parallel::makeCluster(detectCores()-1)
+doParallel::registerDoParallel(Cores)
+
+foreach(i=1:4000, .combine=rbind) %dopar%{
+  random_numbers <- rnorm(100000, mean = 10, sd = 3)
+  mean <- mean(random_numbers)  
+}
+
+parallel::stopCluster(Cores)
+
+end <- Sys.time()
+
+time_to_run <- end - start
+print(time_to_run)
+```
+This program took 5.7 seconds to run, which is longer than the expected value of 2.6 seconds. This is because my estimate assumed that the run time could be evenly split among 7 cores, and did not take into account the run time that could not be shortened by running in parallel, also known as the overhead.
+
+
