@@ -6,6 +6,9 @@ output: html_document
 ---
 Markdown for Assignment 6
 
+This assignment can be found at my [GitHub repository](https://github.com/autumnhodgins/Assignment-6-Repository).
+
+
 Loading all the required packages:
 ```{r}
 library(doParallel)
