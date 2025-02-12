@@ -5,3 +5,17 @@ date: "2025-02-10"
 output: html_document
 ---
 Markdown for Assignment 6
+
+Loading all the required packages:
+```{r}
+library(doParallel)
+library(parallel)
+library(foreach)
+```
+Checking how many cores my computer has.
+```{r}
+detectCores() 
+```
+My computer has 8 cores.
+
+
